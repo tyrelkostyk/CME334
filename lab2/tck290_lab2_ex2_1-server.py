@@ -10,6 +10,7 @@ tck290
 
 import socket
 import sys
+from datetime import datetime
 
 # create an IPv4 TCP socket
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -41,9 +42,20 @@ while True:
 
 		while True:
 			# receive data from client
-			data = clientSocket.recv(bufferSize)
+			data_in = clientSocket.recv(bufferSize)
 
-			# TODO: add current server time to echo message
+			# exit on error
+			if not data_in:
+				print("Server: Error on recv")
+				break
+
+			# add current server time to echo message
+			now = str(datetime.now())
+			data_out = str(now + ": " + data_in.decode("utf-8")).encode("utf-8")
 
 			# echo data back to client
-			error = clientSocket.sendall(data)
+			error = clientSocket.sendall(data_out)
+
+			if error is not None:
+				print("Server: Error on sendall")
+				break
