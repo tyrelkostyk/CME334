@@ -1,6 +1,6 @@
 """
 CME 334
-Lab 2 - Exercise 2.1 (client)
+Lab 2 - Exercise 2.3 (web server client)
 Thursday February 3 2022
 
 Tyrel Kostyk
